@@ -8,7 +8,7 @@ def executeCode(cases):
 
     try:
         while True:
-            if(index == len(tagged)):
+            if(index == len(cases)):
                 print(accumulator)
                 return accumulator
 

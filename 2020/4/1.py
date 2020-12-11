@@ -1,4 +1,4 @@
-with open('input') as f:
+with open('tophertopher') as f:
     passports = "".join(f.readlines()).split("\n\n")
 
 required_fields = [
@@ -37,34 +37,34 @@ def check_valid(details):
         if not field in details:
             return False
     
-    if(not(int(details["byr"]) >= 1920 and int(details["byr"]) <= 2002)):
-        return False
+    # if(not(int(details["byr"]) >= 1920 and int(details["byr"]) <= 2002)):
+    #     return False
     
-    if(not(int(details["iyr"]) >= 2010 and int(details["iyr"]) <= 2020)):
-        return False
+    # if(not(int(details["iyr"]) >= 2010 and int(details["iyr"]) <= 2020)):
+    #     return False
     
-    if(not(int(details["eyr"]) >= 2020 and int(details["eyr"]) <= 2030)):
-        return False
+    # if(not(int(details["eyr"]) >= 2020 and int(details["eyr"]) <= 2030)):
+    #     return False
     
-    if(not(details["hgt"][-2:] == "cm" or details["hgt"][-2:] == "in")):
-        return False
+    # if(not(details["hgt"][-2:] == "cm" or details["hgt"][-2:] == "in")):
+    #     return False
 
-    if(details["hgt"][-2:] == "cm"):
-        if(not(int(details["hgt"][:-2]) >= 150 and int(details["hgt"][:-2]) <= 193)):
-            return False
+    # if(details["hgt"][-2:] == "cm"):
+    #     if(not(int(details["hgt"][:-2]) >= 150 and int(details["hgt"][:-2]) <= 193)):
+    #         return False
 
-    if(details["hgt"][-2:] == "in"):
-        if(not(int(details["hgt"][:-2]) >= 59 and int(details["hgt"][:-2]) <= 76)):
-            return False
+    # if(details["hgt"][-2:] == "in"):
+    #     if(not(int(details["hgt"][:-2]) >= 59 and int(details["hgt"][:-2]) <= 76)):
+    #         return False
 
-    if(not (details["hcl"][0] == "#" and check_if_hex_valid(details["hcl"][1]))):
-        return False
+    # if(not (details["hcl"][0] == "#" and check_if_hex_valid(details["hcl"][1]))):
+    #     return False
 
-    if(not(details["ecl"] in eye_colors)):
-        return False
+    # if(not(details["ecl"] in eye_colors)):
+    #     return False
 
-    if(not (len(details["pid"]) == 9 and details["pid"].isdecimal())):
-        return False
+    # if(not (len(details["pid"]) == 9 and details["pid"].isdecimal())):
+    #     return False
 
     return True
 
