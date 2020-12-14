@@ -10,7 +10,7 @@ def countVisiblyAdjacent(seatMatrix, i, j):
     visiblyAdjacentSeats, rows, columns = 0, len(seatMatrix), len(seatMatrix[0])
     for row_factor in [-1, 0, 1]:
         for column_factor in [-1, 0, 1]:
-            if( not (row_factor == column_factor == 0)):
+            if(not(row_factor == column_factor == 0)):
                 k, l = i + row_factor, j + column_factor
                 while ( k >= 0 and l >= 0 and k < rows and l < columns):
                     if(seatMatrix[k][l] == "L"): break
@@ -30,4 +30,12 @@ def performTransformations(seatMatrix, findSymbol, replaceSymbol, isValidAdjacen
 
 while True:
     count = performTransformations(cases, 'L', '#', (lambda adjacentSeats: adjacentSeats == 0)) or performTransformations(cases, '#', 'L', (lambda adjacentSeats: adjacentSeats >= 5))
-    if(count): [print(count), exit()]
+    if(count): print(count)
+
+
+return a == b
+
+
+if (a==b):
+    return True
+    

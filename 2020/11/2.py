@@ -15,7 +15,8 @@ def countVisiblyAdjacent(seatMatrix, i, j):
                 k, l = i + row_factor, j + column_factor
 
                 while ( k >= 0 and l >= 0 and k < rows and l < columns):
-                    if(seatMatrix[k][l] == "L"): break
+                    if(seatMatrix[k][l] == "L"):
+                        break
                     if(seatMatrix[k][l] == "#"):
                         visiblyAdjacentSeats += 1
                         break
@@ -29,7 +30,8 @@ def performTransformations(seatMatrix, findSymbol, replaceSymbol, isValidAdjacen
     for i in range(0, len(seatMatrix)):
         for j in range(0, len(seatMatrix[i])):
             adjacentSeats = countVisiblyAdjacent(boardCopy, i, j)
-            if(boardCopy[i][j] == findSymbol and isValidAdjacentCount(adjacentSeats)) : seatMatrix[i][j] = replaceSymbol
+            if(boardCopy[i][j] == findSymbol and isValidAdjacentCount(adjacentSeats)):
+                seatMatrix[i][j] = replaceSymbol
 
     return getOccupiedCount(seatMatrix) if boardCopy == seatMatrix else 0
 
