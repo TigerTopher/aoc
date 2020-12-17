@@ -10,8 +10,7 @@ for x in range(0, len(cases)):
         if(cases[x][y] == '#'):
             active_cubes.add((x,y,0))
 
-cycle = 0
-while(cycle < 6):
+for cycle in range(0, 6):
     next_active_cubes = set()
     for active_cube in active_cubes:
         neighbours = []
@@ -33,7 +32,6 @@ while(cycle < 6):
             if(not cube in active_cubes and active_neighbours == 3):
                 next_active_cubes.add(cube)
 
-    cycle += 1
     active_cubes = next_active_cubes
 
 print(len(next_active_cubes))
