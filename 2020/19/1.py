@@ -1,3 +1,4 @@
+# Slow
 import math
 
 with open('input') as f:
@@ -20,9 +21,8 @@ for grammar_rule in grammar_rules:
     grammar[int(index)] = rule
 
 generatedMessages = []
-def parseMessage(message, parseStack=[0]):
-    if(len)
-    print('Message: ', message, 'Stack: ', parseStack)
+
+def parseMessage(message, parseStack):
     if(parseStack == []):
         return generatedMessages.append(message)
 
@@ -31,7 +31,6 @@ def parseMessage(message, parseStack=[0]):
         parseMessage(message + currentRules, parseStack)
     else:
         for rule in currentRules:
-            copyParseStack = parseStack[:]
             parseMessage(message, rule + parseStack)
 
 count = 0
