@@ -8,7 +8,6 @@ for i in range(0, len(cases)):
     cases[i] = [ingredient, allergen]
 
 allergen_uniques = {}
-allergen_count = {}
 ingredient_count = {}
 
 for case in cases:
@@ -19,9 +18,6 @@ for case in cases:
             allergen_uniques[allergen] = set(ingredients)
         else:
             allergen_uniques[allergen] = set.intersection(allergen_uniques[allergen], ingredients)
-        if (not allergen in allergen_count):
-            allergen_count[allergen] = 0
-        allergen_count[allergen] += 1
     for ingredient in ingredients:
         if (not ingredient in ingredient_count):
             ingredient_count[ingredient] = 0
