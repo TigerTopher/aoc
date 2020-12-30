@@ -7,7 +7,6 @@ class Tile:
         self.right = right
         self.top = top
         self.bottom = bottom
-        self.inBoard = False
 
     def getTop(self):
         return self.value[0]
@@ -38,26 +37,28 @@ class Tile:
         self.value.reverse()
 
     def flipHorizontal(self):
-        [value.reverse() for value in self.value]
+        for i in range(0, len(self.value)):
+            self.value[i].reverse()
 
 def matchSides(current_tile, board_tile):
     if(current_tile.getBottom() == board_tile.getTop()):
         board_tile.top = current_tile
         current_tile.bottom = board_tile
-    elif(current_tile.getTop() == board_tile.getBottom()):
+        return True
+    if(current_tile.getTop() == board_tile.getBottom()):
         board_tile.bottom = current_tile
         current_tile.top = board_tile
-    elif(current_tile.getLeft() == board_tile.getRight()):
+        return True
+    if(current_tile.getLeft() == board_tile.getRight()):
         board_tile.right = current_tile
         current_tile.left = board_tile
-    elif(current_tile.getRight() == board_tile.getLeft()):
+        return True
+    if(current_tile.getRight() == board_tile.getLeft()):
         board_tile.left = current_tile
         current_tile.right = board_tile
-    else:
-        return False
+        return True
 
-    current_tile.inBoard = True
-    return True
+    return False
 
 def flipVertical(array):
     array.reverse()
@@ -78,17 +79,30 @@ def findMatch(current_tile, board):
     matchFound = False
     for board_tile in board:
         for angle in [0, 90, 90, 90]:
-            if(not current_tile.inBoard):
-                current_tile.rotateClockwise(angle)
+            current_tile.rotateClockwise(angle)
+            if (matchSides(current_tile, board_tile)):
+                return True
+
+            current_tile.flipVertical()
+            if (matchSides(current_tile, board_tile)):
+                return True
+                
+            current_tile.flipVertical()
+            current_tile.flipHorizontal()
+
+            if (matchSides(current_tile, board_tile)):
+                return True
+            current_tile.flipHorizontal()
+        current_tile.rotateClockwise(90)
+    return matchFound
+
+def findMatchAll(current_tile, board):
+    matchFound = False
+
+    for board_tile in board:
+        if(current_tile.number != board_tile.number):
             if (matchSides(current_tile, board_tile)):
                 matchFound = True
-
-            for flipOperation in [current_tile.flipVertical, current_tile.flipHorizontal]:
-                if(not current_tile.inBoard):
-                    flipOperation()
-                    if (matchSides(current_tile, board_tile)):
-                        matchFound = True
-
     return matchFound
 
 def connectAllTiles(unprocessed_tiles):
@@ -100,12 +114,15 @@ def connectAllTiles(unprocessed_tiles):
         else:
             board.append(current_tile)
 
+    for board_tile in board:
+        findMatchAll(board_tile, board)
     return board
 
 def buildSolutionGrid(board):
     start = board[0]
     while(start.left != next):
         start = start.left
+
     while(start.top != next):
         start = start.top
 
@@ -120,6 +137,7 @@ def buildSolutionGrid(board):
         start = start.bottom
 
     solution_grid = []
+
     # Changing range to (1,9) and [1:-1] trims the border
     for tile_row in tiles:
         for i in range(1, 9):
@@ -177,6 +195,7 @@ def parseTiles():
         raw_tiles = "".join(f.readlines()).rstrip('\n').split("\n\n")
 
     unprocessed_tiles = []
+
     for raw_tile in raw_tiles:
         tile_number, tile = raw_tile.lstrip('Tile: ').split(':\n')
         tile = list(map(list, tile.split("\n")))
@@ -189,7 +208,7 @@ def main():
     unprocessed_tiles = parseTiles()
     board = connectAllTiles(unprocessed_tiles)
     solution_grid = buildSolutionGrid(board)
-
+    print(solution_grid)
     wildSea = getWildSeaCount(solution_grid)
     monsterCount = getMonsterCount(solution_grid)
 

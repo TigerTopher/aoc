@@ -1,4 +1,3 @@
-import math
 with open('input') as f:
     raw_tiles = "".join(f.readlines()).rstrip('\n').split("\n\n")
 
