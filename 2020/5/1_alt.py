@@ -41,4 +41,4 @@ for x in open("input.txt", "r"):
   if value > maximum_seat:
     maximum_seat = value
 
-print maximum_seat
+print(maximum_seat)
